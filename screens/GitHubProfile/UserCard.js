@@ -1,69 +1,104 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
-import Twitter from '../../components/svgr/Twitter';
-import Company from '../../components/svgr/Company';
-import Location from '../../components/svgr/Location';
-import Website from '../../components/svgr/Website';
+import { StyleSheet, Image } from 'react-native';
+import { Text, TextBold, View, ViewContrast } from '../../components/themed';
+import { Twitter, Company, Location, Website } from '../../components/svgr';
 
-const UserCard = () => {
+const UserCard = ({ userData, isLoading, error }) => {
+  if (isLoading)
+    return (
+      <ViewContrast
+        style={{
+          ...styles.card,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Text>Searching ...</Text>
+      </ViewContrast>
+    );
+
+  if (error)
+    return (
+      <ViewContrast
+        style={{
+          ...styles.card,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <NotFound />
+        <Text>There's no such a profile</Text>
+        <Text>Or something else is wrong</Text>
+      </ViewContrast>
+    );
+
+  if (userData === null) return null;
+
   return (
-    <View style={styles.card}>
-      <View style={styles.cardHeader}>
-        <Image
-          source={{ uri: 'https://avatars.githubusercontent.com/u/583231?v=4' }}
-          style={styles.avatar}
-        />
-        <View style={styles.generalInfo}>
-          <Text style={styles.name}>The Octocat</Text>
-          <Text style={styles.username}>@github</Text>
-          <Text style={styles.date}>2011-01-25T18:44:36Z</Text>
-        </View>
-      </View>
-      <View style={styles.bioRow}>
-        <Text style={styles.bioText}>This profile has no bio</Text>
-      </View>
+    <ViewContrast style={styles.card}>
+      <ViewContrast style={styles.cardHeader}>
+        <Image source={{ uri: userData.avatar_url }} style={styles.avatar} />
+        <ViewContrast style={styles.generalInfo}>
+          <TextBold style={styles.name}>{userData.name}</TextBold>
+          <Text style={styles.username}>@{userData.login}</Text>
+          <Text style={styles.date}>{userData.created_at}</Text>
+        </ViewContrast>
+      </ViewContrast>
+      <ViewContrast style={styles.bioRow}>
+        <Text style={styles.bioText}>
+          {userData.bio !== null ? userData.bio : 'This profile has no bio'}
+        </Text>
+      </ViewContrast>
       <View style={styles.statusRow}>
         <View style={styles.statusLabels}>
           <View>
             <Text style={styles.labelText}>Repos</Text>
-            <Text style={styles.statusData}>8</Text>
+            <Text style={styles.statusData}>{userData.public_repos}</Text>
           </View>
           <View>
             <Text style={styles.labelText}>Followers</Text>
-            <Text style={styles.statusData}>21677</Text>
+            <Text style={styles.statusData}>{userData.followers}</Text>
           </View>
           <View>
             <Text style={styles.labelText}>Following</Text>
-            <Text style={styles.statusData}>9</Text>
+            <Text style={styles.statusData}>{userData.following}</Text>
           </View>
         </View>
       </View>
-      <View style={styles.social}>
-        <View style={styles.socialAccount}>
-          <View style={styles.socialIcon}>
+      <ViewContrast style={styles.social}>
+        <ViewContrast style={styles.socialAccount}>
+          <ViewContrast style={styles.socialIcon}>
             <Location color='white' />
-          </View>
-          <Text style={styles.socialText}>San Francisco</Text>
-        </View>
-        <View style={styles.socialAccount}>
-          <View style={styles.socialIcon}>
+          </ViewContrast>
+          <Text style={styles.socialText}>
+            {userData.location ? userData.location : 'Not available'}
+          </Text>
+        </ViewContrast>
+        <ViewContrast style={styles.socialAccount}>
+          <ViewContrast style={styles.socialIcon}>
             <Twitter color='white' />
-          </View>
-          <Text style={styles.socialText}>Not available</Text>
-        </View>
-        <View style={styles.socialAccount}>
-          <View style={styles.socialIcon}>
+          </ViewContrast>
+          <Text style={styles.socialText}>
+            {userData.twitter_username ? userData.twitter_username : 'Not available'}
+          </Text>
+        </ViewContrast>
+        <ViewContrast style={styles.socialAccount}>
+          <ViewContrast style={styles.socialIcon}>
             <Website color='white' />
-          </View>
-          <Text style={styles.socialText}>https://github.blog</Text>
-        </View>
-        <View style={styles.socialAccount}>
-          <View style={styles.socialIcon}>
+          </ViewContrast>
+          <Text style={styles.socialText}>
+            {userData.blog ? userData.blog : 'Not available'}
+          </Text>
+        </ViewContrast>
+        <ViewContrast style={styles.socialAccount}>
+          <ViewContrast style={styles.socialIcon}>
             <Company color='white' />
-          </View>
-          <Text style={styles.socialText}>@github</Text>
-        </View>
-      </View>
-    </View>
+          </ViewContrast>
+          <Text style={styles.socialText}>
+            {userData.company ? userData.company : 'Not available'}
+          </Text>
+        </ViewContrast>
+      </ViewContrast>
+    </ViewContrast>
   );
 };
 
@@ -72,7 +107,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 20,
     marginTop: 20,
-    backgroundColor: '#1e2a47',
   },
   cardHeader: {
     flexDirection: 'row',
@@ -89,16 +123,9 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 24,
-    fontFamily: 'SpaceMono-Regular',
-    color: 'white',
   },
   username: {
     color: '#0079ff',
-    fontFamily: 'SpaceMono-Regular',
-  },
-  date: {
-    color: 'white',
-    fontFamily: 'SpaceMono-Regular',
   },
   bioRow: {
     marginTop: 20,
@@ -106,14 +133,9 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
   },
-  bioText: {
-    color: 'white',
-    fontFamily: 'SpaceMono-Regular',
-  },
   statusRow: {
     borderRadius: 10,
     padding: 30,
-    backgroundColor: '#141d2f',
   },
   statusLabels: {
     flexDirection: 'row',
@@ -121,12 +143,9 @@ const styles = StyleSheet.create({
   },
   labelText: {
     color: '#888888',
-    fontFamily: 'SpaceMono-Regular',
   },
   statusData: {
     fontSize: 20,
-    color: 'white',
-    fontFamily: 'SpaceMono-Regular',
   },
   social: {
     marginTop: 20,
@@ -148,8 +167,6 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     flex: 1,
     flexShrink: 1, // Allows text to shrink if needed
-    color: 'white',
-    fontFamily: 'SpaceMono-Regular',
   },
 });
 

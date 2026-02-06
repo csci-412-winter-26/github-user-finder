@@ -6,8 +6,12 @@ import {
   TextInput,
   Image,
 } from 'react-native';
+import { useState } from 'react';
 
-const InputArea = () => {
+const InputArea = ({ curUsername, setCurUsername }) => {
+  // a state that deals typing username in the input field
+  const [username, setUsername] = useState(curUsername);
+  
   return (
     <View style={styles.inputArea}>
       <View style={{ flexDirection: 'row' }}>
@@ -17,15 +21,18 @@ const InputArea = () => {
         />
         <TextInput
           style={styles.input}
-          value='octocat'
+          value={username}
           keyboardType='default'
           placeholder='Enter GitHub username'
           placeholderTextColor='white'
           autoCapitalize='none'
           autoCorrect={false}
+          onChangeText={(text) => setUsername(text)}
         />
       </View>
-      <Pressable style={styles.button}>
+      <Pressable 
+        style={styles.button} 
+        onPress={() => setCurUsername(username)}>
         <Text style={styles.buttonText}>Search</Text>
       </Pressable>
     </View>
