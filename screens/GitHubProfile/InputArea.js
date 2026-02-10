@@ -11,7 +11,7 @@ import { useState } from 'react';
 const InputArea = ({ curUsername, setCurUsername }) => {
   // a state that deals typing username in the input field
   const [username, setUsername] = useState(curUsername);
-  
+
   return (
     <View style={styles.inputArea}>
       <View style={{ flexDirection: 'row' }}>
@@ -28,11 +28,10 @@ const InputArea = ({ curUsername, setCurUsername }) => {
           autoCapitalize='none'
           autoCorrect={false}
           onChangeText={(text) => setUsername(text)}
+          testID='inputArea'
         />
       </View>
-      <Pressable 
-        style={styles.button} 
-        onPress={() => setCurUsername(username)}>
+      <Pressable style={styles.button} testID='searchButton' onPress={() => setCurUsername(username)}>
         <Text style={styles.buttonText}>Search</Text>
       </Pressable>
     </View>
