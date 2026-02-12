@@ -1,11 +1,8 @@
-import { Main as MainLayout } from './layouts/Main';
-import GitHubProfile from './screens/GitHubProfile';
+import RootNavigation from './navigation/RootNavigation';
 
 const App = () => {
   return (
-    <MainLayout>
-      <GitHubProfile />
-    </MainLayout>
+      <RootNavigation />
   );
 };
 
