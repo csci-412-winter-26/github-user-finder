@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import GitHubProfile from '../screens/GitHubProfile';
 import Settings from '../screens/Settings';
+import useTheme from '../hooks/useTheme';
 
 const TabBarIcon = ({ color, size, name }) => (
   <Ionicons name={name} size={size} color={color} />
@@ -10,15 +11,17 @@ const TabBarIcon = ({ color, size, name }) => (
 const Tab = createBottomTabNavigator();
 
 const BottomTabs = () => {
+  const { colors } = useTheme();
+
   return (
     <Tab.Navigator
       initialRouteName='Profile'
       screenOptions={{
-        tabBarInactiveTintColor: '#4b6a9b',
-        tabBarActiveTintColor: '#0079ff',
+        tabBarInactiveTintColor: colors.textMidContrast,
+        tabBarActiveTintColor: colors.primary,
         tabBarStyle: {
-          backgroundColor: '#141d2f',
-          borderTopColor: '#141d2f', 
+          backgroundColor: colors.background,
+          borderTopColor: colors.background, 
         },
       }}
     >

@@ -3,6 +3,7 @@ import BottomTabs from './BottomTabs';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+import { ThemeProvider } from '../context/theme';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -24,9 +25,11 @@ const RootNavigation = () => {
   
 
   return (
-    <NavigationContainer>
-      <BottomTabs />
-    </NavigationContainer>
+    <ThemeProvider>
+      <NavigationContainer>
+        <BottomTabs />
+      </NavigationContainer>
+    </ThemeProvider>
   );
 };
 

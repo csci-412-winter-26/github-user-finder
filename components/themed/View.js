@@ -1,18 +1,22 @@
 import { View as DefaultView } from 'react-native';
+import useTheme from '../../hooks/useTheme';
 
 const View = ({ style, ...rest }) => {
+  const { colors } = useTheme();
   return (
     <DefaultView
-      style={[{ backgroundColor: "#141d2f" }, style]}
+      style={[{ backgroundColor: colors.background }, style]}
       {...rest}
     />
   );
 };
 
 const ViewContrast = ({ style, ...rest }) => {
+  const { colors } = useTheme();
+  
   return (
     <DefaultView
-      style={[{ backgroundColor: "#1e2a47" }, style]}
+      style={[{ backgroundColor: colors.backgroundSecondary }, style]}
       {...rest}
     />
   );

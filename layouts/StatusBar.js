@@ -1,11 +1,15 @@
 import { StatusBar as DefaultStatusBar } from 'react-native';
+import useTheme from '../hooks/useTheme';
 
 const StatusBar = ({ ...rest }) => {
+  const { theme, colors } = useTheme();
+
+  const barStyle = theme === 'dark' ? 'light-content' : 'dark-content';
 
   return (
     <DefaultStatusBar
-      barStyle='dark-content'
-      backgroundColor='#141d2f'
+      barStyle={barStyle}
+      backgroundColor={colors.background}
       {...rest}
     />
   );

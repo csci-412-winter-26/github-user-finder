@@ -1,8 +1,11 @@
 import { StyleSheet, Image } from 'react-native';
 import { Text, TextBold, View, ViewContrast } from '../../components/themed';
-import { Twitter, Company, Location, Website } from '../../components/svgr';
+import { Twitter, Company, Location, Website, NotFound } from '../../components/svgr';
+import useTheme from '../../hooks/useTheme';
 
 const UserCard = ({ userData, isLoading, error }) => {
+  const { colors } = useTheme();
+
   if (isLoading)
     return (
       <ViewContrast
@@ -39,8 +42,8 @@ const UserCard = ({ userData, isLoading, error }) => {
         <Image source={{ uri: userData.avatar_url }} style={styles.avatar} />
         <ViewContrast style={styles.generalInfo}>
           <TextBold style={styles.name}>{userData.name}</TextBold>
-          <Text style={styles.username}>@{userData.login}</Text>
-          <Text style={styles.date}>{userData.created_at}</Text>
+          <Text style={{ color: colors.primary }}>@{userData.login}</Text>
+          <Text>{userData.created_at}</Text>
         </ViewContrast>
       </ViewContrast>
       <ViewContrast style={styles.bioRow}>
@@ -60,14 +63,14 @@ const UserCard = ({ userData, isLoading, error }) => {
           </View>
           <View>
             <Text style={styles.labelText}>Following</Text>
-            <Text style={styles.statusData}>{userData.following}</Text>
+            <Text style={styles.statusData}>{userData.following}</Text> 
           </View>
         </View>
       </View>
       <ViewContrast style={styles.social}>
         <ViewContrast style={styles.socialAccount}>
           <ViewContrast style={styles.socialIcon}>
-            <Location color='white' />
+            <Location color={userData.location ? colors.text : colors.textLowContrast} />
           </ViewContrast>
           <Text style={styles.socialText}>
             {userData.location ? userData.location : 'Not available'}
@@ -75,7 +78,7 @@ const UserCard = ({ userData, isLoading, error }) => {
         </ViewContrast>
         <ViewContrast style={styles.socialAccount}>
           <ViewContrast style={styles.socialIcon}>
-            <Twitter color='white' />
+            <Twitter color={userData.twitter_username ? colors.text : colors.textLowContrast} />
           </ViewContrast>
           <Text style={styles.socialText}>
             {userData.twitter_username ? userData.twitter_username : 'Not available'}
@@ -83,7 +86,7 @@ const UserCard = ({ userData, isLoading, error }) => {
         </ViewContrast>
         <ViewContrast style={styles.socialAccount}>
           <ViewContrast style={styles.socialIcon}>
-            <Website color='white' />
+            <Website color={userData.blog ? colors.text : colors.textLowContrast} />
           </ViewContrast>
           <Text style={styles.socialText}>
             {userData.blog ? userData.blog : 'Not available'}
@@ -91,7 +94,7 @@ const UserCard = ({ userData, isLoading, error }) => {
         </ViewContrast>
         <ViewContrast style={styles.socialAccount}>
           <ViewContrast style={styles.socialIcon}>
-            <Company color='white' />
+            <Company color={userData.company ? colors.text : colors.textLowContrast} />
           </ViewContrast>
           <Text style={styles.socialText}>
             {userData.company ? userData.company : 'Not available'}
@@ -123,9 +126,6 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 24,
-  },
-  username: {
-    color: '#0079ff',
   },
   bioRow: {
     marginTop: 20,
