@@ -1,7 +1,7 @@
 import { View, Pressable, StyleSheet, TextInput, Image } from 'react-native';
-import { TextBold } from '../../components/themed';
+import { TextBold } from 'components/themed';
 import { useState } from 'react';
-import useTheme from '../../hooks/useTheme';
+import useTheme from 'hooks/useTheme';
 
 const InputArea = ({ curUsername, setCurUsername }) => {
   // a state that deals typing username in the input field

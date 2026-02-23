@@ -1,5 +1,5 @@
 import { StatusBar as DefaultStatusBar } from 'react-native';
-import useTheme from '../hooks/useTheme';
+import useTheme from 'hooks/useTheme';
 
 const StatusBar = ({ ...rest }) => {
   const { theme, colors } = useTheme();

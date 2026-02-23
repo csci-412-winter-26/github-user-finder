@@ -1,5 +1,5 @@
 import { View as DefaultView } from 'react-native';
-import useTheme from '../../hooks/useTheme';
+import useTheme from 'hooks/useTheme';
 
 const View = ({ style, ...rest }) => {
   const { colors } = useTheme();

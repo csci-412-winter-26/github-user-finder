@@ -1,8 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import GitHubProfile from '../screens/GitHubProfile';
-import Settings from '../screens/Settings';
-import useTheme from '../hooks/useTheme';
+import GitHubProfile from 'screens/GitHubProfile';
+import Settings from 'screens/Settings';
+import useTheme from 'hooks/useTheme';
 
 const TabBarIcon = ({ color, size, name }) => (
   <Ionicons name={name} size={size} color={color} />
@@ -21,7 +21,7 @@ const BottomTabs = () => {
         tabBarActiveTintColor: colors.primary,
         tabBarStyle: {
           backgroundColor: colors.background,
-          borderTopColor: colors.background, 
+          borderTopColor: colors.background,
         },
       }}
     >

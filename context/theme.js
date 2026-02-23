@@ -1,6 +1,6 @@
 // create a theme context to manage light and dark themes
 import { createContext, useState } from 'react';
-import Colors from '../constants/Colors';
+import Colors from 'constants/Colors';
 
 const ThemeContext = createContext();
 

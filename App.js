@@ -1,4 +1,4 @@
-import RootNavigation from './navigation/RootNavigation';
+import RootNavigation from 'navigation/RootNavigation';
 
 const App = () => {
   return (

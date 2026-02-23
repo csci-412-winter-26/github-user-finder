@@ -1,11 +1,11 @@
 import { ScrollView, StyleSheet, Pressable, View } from 'react-native';
 import { useState } from 'react';
-import { Text } from '../../components/themed';
+import { Text } from 'components/themed';
 import Header from './Header';
-import { Main as MainLayout } from '../../layouts/Main';
+import { Main as MainLayout } from 'layouts/Main';
 // import { useContext } from 'react';
-// import { ThemeContext } from '../../context/theme';
-import useTheme from '../../hooks/useTheme';
+// import { ThemeContext } from 'context/theme';
+import useTheme from 'hooks/useTheme';
 
 // create a button row component to display a circle button and a text label
 const ButtonRow = ({ label, clicked, onPress }) => {

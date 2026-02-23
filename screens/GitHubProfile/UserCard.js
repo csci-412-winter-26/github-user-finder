@@ -1,7 +1,7 @@
 import { StyleSheet, Image } from 'react-native';
-import { Text, TextBold, View, ViewContrast } from '../../components/themed';
-import { Twitter, Company, Location, Website, NotFound } from '../../components/svgr';
-import useTheme from '../../hooks/useTheme';
+import { Text, TextBold, View, ViewContrast } from 'components/themed';
+import { Twitter, Company, Location, Website, NotFound } from 'components/svgr';
+import useTheme from 'hooks/useTheme';
 
 const UserCard = ({ userData, isLoading, error }) => {
   const { colors } = useTheme();

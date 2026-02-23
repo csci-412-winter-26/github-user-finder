@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
-import { Main as MainLayout } from '../../layouts/Main';
+import { Main as MainLayout } from 'layouts/Main';
 import InputArea from './InputArea';
 import Header from './Header';
 import UserCard from './UserCard';
-import useData from '../../hooks/useData';
+import useData from 'hooks/useData';
 
 const GitHubProfile = () => {
   // a state variable to hold the username

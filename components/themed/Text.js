@@ -1,6 +1,6 @@
 // customized text component that uses a specfict Font family
 import { Text as DefaultText, StyleSheet } from 'react-native';
-import useTheme from '../../hooks/useTheme';
+import useTheme from 'hooks/useTheme';
 
 // props: style, children, other Text props
 const Text = ({ style, children, ...props }) => {

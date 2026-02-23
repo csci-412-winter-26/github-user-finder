@@ -3,7 +3,7 @@ import BottomTabs from './BottomTabs';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-import { ThemeProvider } from '../context/theme';
+import { ThemeProvider } from 'context/theme';
 
 SplashScreen.preventAutoHideAsync();
 
