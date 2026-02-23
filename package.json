@@ -13,9 +13,24 @@
   },
   "jest": {
     "preset": "jest-expo",
+    "moduleDirectories": [
+      "node_modules",
+      "<rootDir>"
+    ],
     "setupFilesAfterEnv": [
       "./jest-setup.js"
-    ]
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|@expo/vector-icons)"
+    ],
+    "moduleNameMapper": {
+      "^expo-asset$": "<rootDir>/__mocks__/expo-asset.js",
+      "^expo-font$": "<rootDir>/__mocks__/expo-font.js",
+      "^@expo/vector-icons$": "<rootDir>/__mocks__/@expo/vector-icons.js",
+      "^react-native-safe-area-context$": "<rootDir>/__mocks__/react-native-safe-area-context.js",
+      "^@react-navigation/bottom-tabs$": "<rootDir>/__mocks__/@react-navigation/bottom-tabs.js",
+      "^@react-navigation/native$": "<rootDir>/__mocks__/@react-navigation/native.js"
+    }
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
@@ -27,6 +42,7 @@
     "expo-status-bar": "~3.0.9",
     "react": "19.1.0",
     "react-native": "0.81.5",
+    "react-native-gesture-handler": "^2.30.0",
     "react-native-safe-area-context": "~5.6.0",
     "react-native-screens": "~4.16.0",
     "react-native-svg": "15.12.1",

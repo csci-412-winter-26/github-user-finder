@@ -4,7 +4,7 @@ import App from '../App';
 import GitHubProfile from '../screens/GitHubProfile';
 
 test('renders correctly', async() => {
-  const { getByText } = render(<GitHubProfile />);
+  const { getByText } = render(<App />);
   const headerText = getByText('devfinder');
   // expect headerText not to be null
   expect(headerText).not.toBeNull();

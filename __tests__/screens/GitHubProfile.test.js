@@ -1,10 +1,11 @@
 // test if the expo app renders without crashing
 import { render, waitFor, fireEvent } from '@testing-library/react-native';
 import GitHubProfile from '../../screens/GitHubProfile';
+import App from '../../App';
 
 test('simulate user behavior', async () => {
   // render the GitHubProfile component
-  const { getByTestId, getByText, queryAllByText } = render(<GitHubProfile />);
+  const { getByTestId, getByText, queryAllByText } = render(<App />);
   // rettrieve the input area using getByTestId
   const inputArea = getByTestId('inputArea');
   // retrieve the search button using getByText
