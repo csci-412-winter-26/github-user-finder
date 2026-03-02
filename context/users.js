@@ -1,72 +1,74 @@
-// create a context of all stored users
-import { createContext, useEffect, useState, useRef } from 'react';
+// create a context to manage the list of users
+import { createContext, useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 
 const UsersContext = createContext();
 
 const UsersProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const isMounted = useRef(true);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  // get users from mockup backend
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/users');
-        if (isMounted.current) {
-          setUsers(response.data);
-          setLoading(false);
-        }
-      } catch (error) {
-        console.error('Error fetching users:', error);
-        if (isMounted.current) {
-          setError(error);
-          setLoading(false);
-        }
+  // get request to the mockup server to get the list of users
+  const fetchUsers = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.get('http://localhost:3000/users');
+      if (isMounted.current) {
+        setUsers(response.data);
       }
-    };
-    fetchUsers();
+    } catch (err) {
+      if (isMounted.current) {
+        setError(err.message);
+      }
+    } finally {
+      if (isMounted.current) {
+        setLoading(false);
+      }
+    }
+  };
 
-    // clean up function
+  useEffect(() => {
+    fetchUsers();
     return () => {
       isMounted.current = false;
     };
   }, []);
 
-  // function that adds a new user to the backend and updates the context
-  const addUser = async (user) => {
+  // create a new user and add it to the list of users
+  const createUser = async (user) => {
+    setError(null);
     try {
       const response = await axios.post('http://localhost:3000/users', user);
       if (isMounted.current) {
         setUsers((prevUsers) => [...prevUsers, response.data]);
       }
-    } catch (error) {
-      console.error('Error adding user:', error);
+    } catch (err) {
       if (isMounted.current) {
-        setError(error);
+        setError(err.message);
       }
     }
   };
 
-  // function that deletes a user from the backend and updates the context
-  const deleteUser = async (userId) => {
+  // delete a user from the list of users
+  const deleteUser = async (id) => {
+    setError(null);
     try {
-      await axios.delete(`http://localhost:3000/users/${userId}`);
+      await axios.delete(`http://localhost:3000/users/${id}`);
       if (isMounted.current) {
-        setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
+        setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
       }
-    } catch (error) {
-      console.error('Error deleting user:', error);
+    } catch (err) {
       if (isMounted.current) {
-        setError(error);
+        setError(err.message);
       }
     }
   };
 
   return (
-    <UsersContext.Provider value={{ users, setUsers, loading, error, addUser, deleteUser }}>
+    <UsersContext.Provider value={{ users, setUsers,loading, error, createUser, deleteUser }}>
       {children}
     </UsersContext.Provider>
   );

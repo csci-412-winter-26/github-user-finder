@@ -18,7 +18,7 @@ const GitHubProfile = () => {
   return (
     <MainLayout>
       <View style={{ padding: 20 }}>
-        <Header />
+        <Header user={data} />
         <ScrollView keyboardShouldPersistTaps='handled'>
           <InputArea
             curUsername={curUsername}

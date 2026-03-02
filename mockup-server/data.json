@@ -2,13 +2,25 @@
   "users": [
     {
       "login": "octocat",
-      "id": 583231,
+      "id": "583231",
       "avatar_url": "https://avatars.githubusercontent.com/u/583231?v=4",
       "name": "The Octocat"
     },
     {
-      "login": "hh",
+      "login": "torvalds",
+      "id": "1024025",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1024025?v=4",
+      "name": "Linus Torvalds"
+    },
+    {
+      "login": "gaearon",
+      "id": "810438",
+      "avatar_url": "https://avatars.githubusercontent.com/u/810438?v=4",
+      "name": "Dan Abramov"
+    },
+    {
       "id": 31331,
+      "login": "hh",
       "avatar_url": "https://avatars.githubusercontent.com/u/31331?v=4",
       "name": "Hippie Hacker"
     }

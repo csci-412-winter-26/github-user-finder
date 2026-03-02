@@ -4,6 +4,7 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { ThemeProvider } from 'context/theme';
+import { UsersProvider } from 'context/users';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -26,9 +27,11 @@ const RootNavigation = () => {
 
   return (
     <ThemeProvider>
-      <NavigationContainer>
-        <BottomTabs />
-      </NavigationContainer>
+      <UsersProvider>
+        <NavigationContainer>
+          <BottomTabs />
+        </NavigationContainer>
+      </UsersProvider>
     </ThemeProvider>
   );
 };
